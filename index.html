@@ -1,227 +1,669 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screener Multi-Indikator IDX</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6}
-    .container{max-width:900px;margin:0 auto;padding:0 20px}
-    
-    header{background:linear-gradient(180deg,#00150a 0%,#0a0a0a 100%);padding:80px 20px 60px;text-align:center;border-bottom:1px solid #1a1a1a}
-    .badge{display:inline-block;background:#0a2a1a;color:#00ff88;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px;border:1px solid #00ff8833}
-    h1{font-size:2.8rem;color:#fff;margin-bottom:15px}
-    h1 span{color:#00ff88}
-    .subtitle{font-size:1.2rem;color:#888;max-width:550px;margin:0 auto 30px}
-    
-    .btn{display:inline-block;padding:14px 40px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .3s}
-    .btn-primary{background:#00ff88;color:#000}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,255,136,.2)}
-    
-    .features{padding:60px 0;background:#0a0a0a}
-    .section-title{text-align:center;font-size:1.8rem;margin-bottom:40px;color:#fff}
-    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
-    .feature-card{background:#111;border:1px solid #222;border-radius:14px;padding:30px}
-    .feature-card h3{color:#00ff88;margin-bottom:10px;font-size:1.1rem}
-    .feature-card p{color:#777;font-size:14px}
-    
-    .pricing{padding:60px 0;background:#0d0d0d;text-align:center}
-    .price-box{max-width:450px;margin:0 auto;background:#111;border:2px solid #00ff88;border-radius:20px;padding:50px 35px;position:relative}
-    .price-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#ff4444;color:#fff;padding:6px 20px;border-radius:20px;font-size:12px;font-weight:700}
-    .price-box h3{font-size:1.6rem;color:#fff;margin-bottom:10px}
-    .price-original{font-size:1.3rem;color:#555;text-decoration:line-through;margin:10px 0}
-    .price-final{font-size:3.5rem;font-weight:700;color:#00ff88;margin:10px 0}
-    .price-final span{font-size:1rem;color:#888;font-weight:400}
-    .price-note{color:#ff4444;font-size:14px;margin-bottom:25px;font-weight:600}
-    
-    .price-features{list-style:none;text-align:left;margin:30px 0}
-    .price-features li{padding:12px 0;border-bottom:1px solid #1a1a1a;font-size:15px;color:#bbb}
-    .price-features li::before{content:'✓';color:#00ff88;margin-right:12px;font-weight:700}
-    
-    .guarantee{background:#0a1a0a;border:1px solid #00ff8833;border-radius:12px;padding:20px;margin-top:25px;text-align:center}
-    .guarantee p{color:#aaa;font-size:13px;margin:0}
-    
-    .order-section{padding:60px 0;background:#0a0a0a;display:none}
-    .order-section.active{display:block}
-    .form-box{max-width:450px;margin:0 auto;background:#111;border:1px solid #222;border-radius:16px;padding:40px}
-    .form-group{margin-bottom:20px;text-align:left}
-    .form-group label{display:block;margin-bottom:8px;color:#aaa;font-size:14px}
-    .form-group input{width:100%;padding:12px 15px;background:#0a0a0a;border:1px solid #333;border-radius:8px;color:#fff;font-size:15px}
-    .form-group input:focus{outline:none;border-color:#00ff88}
-    
-    .result-box{margin-top:20px;padding:25px;border-radius:12px;background:#0a2a1a;border:1px solid #00ff8833;display:none;text-align:center}
-    .result-box.show{display:block}
-    .result-box h4{color:#00ff88;margin-bottom:15px;font-size:1.2rem}
-    .key-display{font-size:22px;font-weight:700;color:#fff;letter-spacing:2px;background:#000;padding:15px;border-radius:8px;margin:15px 0;word-break:break-all}
-    .result-box .wa-link{display:inline-block;margin-top:15px;background:#25D366;color:#fff;padding:12px 25px;border-radius:8px;text-decoration:none;font-weight:600}
-    
-    footer{padding:40px 0;background:#080808;border-top:1px solid #1a1a1a;text-align:center;color:#555;font-size:13px}
-    footer a{color:#888}
-    
-    @media(max-width:600px){
-      h1{font-size:2rem}
-      .price-final{font-size:2.5rem}
-      .price-box{padding:35px 20px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDX Screener Pro — Sinyal BUY Otomatis Saham Indonesia</title>
+<meta name="description" content="Screener saham IDX dengan sinyal BUY/SELL otomatis. Win rate 63%, 88 saham dibacktest 2024-2026. Mulai Rp 36.000/bulan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Midtrans Snap.js — GANTI ke production URL saat live -->
+<!-- Sandbox: -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="ISI_CLIENT_KEY_KAMU_DISINI"></script>
+<!-- Production (uncomment saat live): -->
+<!-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="ISI_CLIENT_KEY_PRODUCTION"></script> -->
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1120;
+  --card:#161E2E;
+  --card2:#1C2537;
+  --green:#22C55E;
+  --green-pale:#0D2818;
+  --amber:#F59E0B;
+  --red:#EF4444;
+  --blue:#3B82F6;
+  --muted:#6B7280;
+  --muted2:#9CA3AF;
+  --white:#F9FAFB;
+  --border:#1F2D40;
+  --border2:#263347;
+  --BACKEND_URL: 'https://ISI-RAILWAY-URL-KAMU.railway.app';
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--navy);color:var(--white);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(11,17,32,0.95);backdrop-filter:blur(8px)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1rem;color:var(--white);text-decoration:none}
+.logo-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-cta{background:var(--green);color:#000;font-weight:800;font-size:.82rem;padding:.45rem 1.1rem;border-radius:6px;text-decoration:none}
+
+/* HERO */
+.hero{text-align:center;padding:5rem 2rem 4rem;max-width:780px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-pale);border:1px solid rgba(34,197,94,.3);color:var(--green);font-size:.72rem;font-weight:700;padding:.35rem .9rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+.hero-badge span{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--green)}
+.hero-sub{font-size:1.05rem;color:var(--muted2);max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-cta-group{display:flex;flex-direction:column;align-items:center;gap:.75rem}
+
+/* STATS */
+.stats-bar{display:flex;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:640px;margin:0 auto}
+.stat-item{flex:1;padding:1.25rem 1rem;text-align:center;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:1.6rem;font-weight:800;color:var(--white);font-family:'DM Mono',monospace;line-height:1}
+.stat-num.green{color:var(--green)}
+.stat-label{font-size:.68rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em}
+
+/* SECTION */
+.section{max-width:920px;margin:0 auto;padding:5rem 2rem}
+.section-label{font-size:.68rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem}
+.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-bottom:1rem}
+.section-sub{font-size:.95rem;color:var(--muted2);max-width:500px;line-height:1.75;margin-bottom:2.5rem}
+hr.divider{border:none;border-top:1px solid var(--border)}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.pain-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.4rem;display:flex;gap:12px}
+.pain-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem}
+.pain-card strong{color:var(--white);display:block;margin-bottom:.3rem;font-size:.9rem}
+.pain-card p{font-size:.82rem;color:var(--muted2);line-height:1.65}
+
+/* DEMO SCREENER — mirip tampilan asli */
+.demo-wrapper{background:#0d1117;border:1px solid var(--border2);border-radius:12px;overflow:hidden;position:relative}
+.demo-topbar{background:#111827;border-bottom:1px solid var(--border2);padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.demo-regime{display:flex;align-items:center;gap:8px;font-size:.75rem}
+.regime-badge{background:#EF4444;color:#fff;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.04em}
+.demo-ihsg{font-size:.7rem;color:var(--muted2);font-family:'DM Mono',monospace}
+
+.demo-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border2)}
+.demo-stat{padding:.85rem 1rem;text-align:center;border-right:1px solid var(--border2)}
+.demo-stat:last-child{border-right:none}
+.demo-stat-label{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.demo-stat-val{font-size:1.8rem;font-weight:800;font-family:'DM Mono',monospace;line-height:1}
+.demo-stat-val.g{color:var(--green)}
+.demo-stat-val.b{color:var(--blue)}
+.demo-stat-val.a{color:var(--amber)}
+.demo-stat-val.r{color:var(--red)}
+
+.demo-mood{background:#111827;border-bottom:1px solid var(--border2);padding:.5rem 1rem;font-size:.72rem;color:var(--muted2);display:flex;align-items:center;gap:8px}
+.mood-bearish{color:#EF4444;font-weight:700}
+.mood-tag{padding:.15rem .5rem;border-radius:3px;font-size:.65rem;font-weight:600}
+.mood-golden{background:rgba(245,158,11,.2);color:var(--amber)}
+.mood-death{background:rgba(239,68,68,.2);color:var(--red)}
+
+.demo-table-wrap{overflow-x:auto}
+table.demo-table{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:.72rem}
+table.demo-table th{background:#111827;color:var(--muted);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;padding:.55rem .75rem;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap}
+table.demo-table td{padding:.6rem .75rem;border-bottom:1px solid rgba(31,45,64,.6);white-space:nowrap;vertical-align:middle}
+table.demo-table tr:hover td{background:rgba(255,255,255,.02)}
+.td-ticker{display:flex;align-items:center;gap:6px}
+.td-ticker strong{color:var(--white);font-size:.78rem}
+.liq-badge{font-size:.58rem;padding:.1rem .4rem;border-radius:3px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;background:rgba(34,197,94,.15);color:var(--green)}
+.chg-pos{color:var(--green)}
+.chg-neg{color:var(--red)}
+.rsi-val{color:var(--white)}
+.macd-pos{color:var(--green)}
+.macd-neg{color:var(--red)}
+.cross-bull{display:inline-block;background:rgba(59,130,246,.18);color:#60A5FA;padding:.2rem .55rem;border-radius:4px;font-size:.68rem;font-weight:700}
+.cross-bear{display:inline-block;background:rgba(107,114,128,.18);color:var(--muted2);padding:.2rem .55rem;border-radius:4px;font-size:.68rem;font-weight:700}
+.rvol-val{color:var(--muted2)}
+.rvol-hot{color:var(--amber)}
+.bdr-akum{display:inline-block;background:rgba(245,158,11,.15);color:var(--amber);padding:.2rem .55rem;border-radius:4px;font-size:.68rem;font-weight:700}
+.pwr-dots{color:var(--green);letter-spacing:2px}
+.pwr-dots.mid{color:var(--amber)}
+.fase-breakout{display:inline-block;background:rgba(34,197,94,.12);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.68rem;font-weight:700}
+.fase-rebound{display:inline-block;background:rgba(59,130,246,.12);color:#60A5FA;padding:.2rem .6rem;border-radius:4px;font-size:.68rem;font-weight:700}
+.entry-val{color:var(--muted2);font-size:.68rem}
+.tp-val{color:var(--green);font-weight:600}
+.sl-val{color:var(--red)}
+.rr-val{color:var(--muted2)}
+.rr-val.good{color:var(--green)}
+.type-antri{display:inline-block;background:rgba(34,197,94,.15);color:var(--green);padding:.2rem .6rem;border-radius:4px;font-size:.68rem;font-weight:800;letter-spacing:.04em}
+
+.demo-blur{position:relative}
+.demo-blur::after{
+  content:'🔒 Data lengkap tersedia setelah berlangganan';
+  position:absolute;bottom:0;left:0;right:0;
+  height:100px;
+  background:linear-gradient(to bottom,transparent,#0d1117 75%);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:1rem;
+  font-size:.75rem;color:var(--muted2);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  pointer-events:none;
+}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
+.feat-icon{font-size:1.4rem;margin-bottom:.85rem}
+.feat-card h3{font-size:.92rem;font-weight:700;margin-bottom:.5rem;color:var(--white)}
+.feat-card p{font-size:.8rem;color:var(--muted2);line-height:1.65}
+.feat-card.hl{border-color:rgba(34,197,94,.3);background:rgba(13,40,24,.5)}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.step{text-align:center;padding:1.5rem .75rem}
+.step-num{width:40px;height:40px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.82rem;color:var(--green);margin:0 auto .85rem}
+.step h4{font-size:.85rem;font-weight:700;margin-bottom:.4rem;color:var(--white)}
+.step p{font-size:.77rem;color:var(--muted2);line-height:1.65}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.testi-stars{color:var(--amber);font-size:.82rem;margin-bottom:.75rem;letter-spacing:2px}
+.testi-text{font-size:.83rem;color:var(--muted2);line-height:1.75;margin-bottom:1rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-avatar{width:32px;height:32px;border-radius:50%;background:var(--green-pale);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:var(--green);flex-shrink:0}
+.testi-name{font-size:.82rem;font-weight:700;color:var(--white)}
+.testi-role{font-size:.7rem;color:var(--muted)}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:1.5rem;align-items:start;max-width:700px;margin:0 auto}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem}
+.price-card.featured{border-color:rgba(34,197,94,.4);position:relative}
+.price-pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;font-size:.68rem;font-weight:800;padding:.28rem 1rem;border-radius:100px;white-space:nowrap;letter-spacing:.04em}
+.price-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem}
+.price-amount{display:flex;align-items:baseline;gap:3px;margin-bottom:.2rem}
+.price-rp{font-size:.95rem;color:var(--muted2)}
+.price-num{font-size:2.6rem;font-weight:800;color:var(--white);font-family:'DM Mono',monospace;line-height:1}
+.price-per{font-size:.8rem;color:var(--muted);margin-left:3px}
+.price-orig{font-size:.78rem;color:var(--muted);text-decoration:line-through;margin-bottom:1.25rem}
+.disc-tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--amber);font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:4px;margin-left:6px;vertical-align:middle;text-decoration:none}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.price-list li{display:flex;align-items:flex-start;gap:8px;font-size:.83rem;color:var(--muted2)}
+.price-list li::before{content:'✓';color:var(--green);font-weight:800;font-size:.85rem;flex-shrink:0;margin-top:.05rem}
+.btn-pay{display:block;width:100%;text-align:center;background:var(--green);color:#000;font-weight:800;font-size:.9rem;padding:.9rem;border-radius:8px;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:opacity .15s}
+.btn-pay:hover{opacity:.88}
+.btn-pay.outline{background:transparent;color:var(--white);border:1px solid var(--border2)}
+.btn-pay.outline:hover{background:var(--card2)}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:.75rem;max-width:680px;margin:0 auto}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;cursor:pointer}
+.faq-q{font-size:.88rem;font-weight:600;color:var(--white);display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
+.faq-q .faq-arrow{font-size:.9rem;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.faq-a{font-size:.83rem;color:var(--muted2);line-height:1.75;margin-top:.75rem;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+
+/* ORDER MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.active{display:flex}
+.modal{background:var(--card);border:1px solid rgba(34,197,94,.25);border-radius:16px;padding:2rem;width:100%;max-width:460px}
+.modal-title{font-size:1.1rem;font-weight:800;margin-bottom:.35rem}
+.modal-sub{font-size:.82rem;color:var(--muted2);margin-bottom:1.5rem}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.72rem;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
+.form-input{width:100%;background:#0B1120;border:1px solid var(--border2);border-radius:8px;padding:.7rem .9rem;color:var(--white);font-size:.88rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color .15s}
+.form-input:focus{border-color:rgba(34,197,94,.5)}
+.modal-paket-info{background:rgba(13,40,24,.8);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:.85rem 1rem;margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center}
+.modal-paket-name{font-size:.82rem;color:var(--muted2)}
+.modal-paket-price{font-size:1rem;font-weight:800;color:var(--green);font-family:'DM Mono',monospace}
+.modal-close{float:right;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;margin-top:-.25rem}
+.modal-err{font-size:.78rem;color:var(--red);margin-top:.5rem;display:none}
+.loading-spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
+footer p{font-size:.75rem;color:var(--muted);line-height:1.9}
+
+@media(max-width:640px){
+  .pain-grid,.feat-grid,.steps,.testi-grid,.pricing-grid{grid-template-columns:1fr}
+  .stats-bar{flex-wrap:wrap}
+  .stat-item{min-width:50%;border-bottom:1px solid var(--border)}
+  .demo-stats{grid-template-columns:repeat(2,1fr)}
+  table.demo-table th:nth-child(n+6),table.demo-table td:nth-child(n+6){display:none}
+}
+</style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <div class="badge">🔬 Multi-Indikator v7</div>
-    <h1>Screener Saham <span>IDX</span></h1>
-    <p class="subtitle">Analisis teknikal otomatis dengan RSI, MACD, Stochastic, Volume, Golden/Death Cross, dan sinyal ENTRY lengkap.</p>
-    <a href="#order" class="btn btn-primary" onclick="showOrder()">Dapatkan Akses</a>
-  </div>
-</header>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><div class="logo-dot"></div>IDX Screener Pro</a>
+  <a href="#order" class="nav-cta" onclick="openModal('tahunan')">Mulai Sekarang →</a>
+</nav>
 
-<section class="features">
-  <div class="container">
-    <h2 class="section-title">Fitur Lengkap</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>📊 7+ Indikator</h3>
-        <p>RSI, MACD, Stochastic, RVOL, BDR, Power Meter, dan Trend Analysis dalam satu layar.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span></span>Dibacktest 2024–2026 · 88 Saham IDX</div>
+  <h1>Tahu <em>Kapan Beli</em>,<br>Sebelum Harga Naik</h1>
+  <p class="hero-sub">Screener saham otomatis dengan sinyal BUY/SELL dari 7+ indikator terintegrasi. Tidak perlu jago analisis teknikal — sistemnya yang kerja untuk kamu.</p>
+  <div class="hero-cta-group">
+    <a href="#order" class="btn-pay" style="display:inline-block;width:auto;padding:.9rem 2.25rem;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif" onclick="openModal('tahunan')">Mulai Sekarang — Rp 380.000/tahun →</a>
+    <span style="font-size:.75rem;color:var(--muted)">Atau Rp 36.000/bulan · Akses penuh · Bayar via Midtrans</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="max-width:640px;margin:0 auto;padding:0 2rem 5rem">
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num green">63%</div><div class="stat-label">Win Rate Backtest</div></div>
+    <div class="stat-item"><div class="stat-num">88</div><div class="stat-label">Saham Dianalisis</div></div>
+    <div class="stat-item"><div class="stat-num">7+</div><div class="stat-label">Indikator</div></div>
+    <div class="stat-item"><div class="stat-num green">2024–26</div><div class="stat-label">Periode Data</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PAIN -->
+<section class="section">
+  <div class="section-label">Kenapa trading sering rugi</div>
+  <h2 class="section-title">Masalah yang hampir semua<br>trader retail alami</h2>
+  <p class="section-sub">Bukan karena salah saham — tapi karena tidak punya sistem yang konsisten dan terukur.</p>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="pain-icon">😰</div><div><strong>Beli pas puncak, jual pas bawah</strong><p>Beli karena ikut grup Telegram atau feeling, bukan berdasarkan sinyal yang terukur.</p></div></div>
+    <div class="pain-card"><div class="pain-icon">⏳</div><div><strong>Tidak sempat pantau chart seharian</strong><p>Sibuk kerja atau urus rumah — tidak mungkin monitor 88 saham sekaligus setiap hari.</p></div></div>
+    <div class="pain-card"><div class="pain-icon">😵</div><div><strong>Terlalu banyak indikator, bingung sendiri</strong><p>RSI naik tapi MACD turun. Volume besar tapi harga flat. Akhirnya tidak jadi beli.</p></div></div>
+    <div class="pain-card"><div class="pain-icon">💸</div><div><strong>Tidak tahu kapan harus cut loss</strong><p>Karena tidak ada SL yang jelas sejak awal, hold terus sampai floating loss makin dalam.</p></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DEMO SCREENER -->
+<section class="section">
+  <div class="section-label">Tampilan asli dashboard</div>
+  <h2 class="section-title">Sinyal langsung terbaca,<br>tidak perlu tebak-tebakan</h2>
+  <p class="section-sub">Setiap pagi kamu tahu persis: saham mana yang layak dimasuki hari ini, mana yang ditunggu, mana yang dihindari.</p>
+
+  <div class="demo-wrapper demo-blur">
+    <!-- Topbar -->
+    <div class="demo-topbar">
+      <div class="demo-regime">
+        <span style="font-size:.72rem;color:var(--muted2)">IHSG Regime</span>
+        <span class="regime-badge">● BEAR</span>
       </div>
-      <div class="feature-card">
-        <h3>🎯 Sinyal Entry</h3>
-        <p>ANTRI (limit order), MISS, WAIT, dan EXIT dengan perhitungan TP/SL otomatis.</p>
-      </div>
-      <div class="feature-card">
-        <h3>🛡️ IHSG Regime</h3>
-        <p>Deteksi Bullish/Bearish otomatis. Sistem proteksi saat pasar bearish.</p>
-      </div>
-      <div class="feature-card">
-        <h3>⚡ Real-Time</h3>
-        <p>Auto-refresh data setiap 30 detik. Akses dari HP, tablet, atau laptop.</p>
-      </div>
-      <div class="feature-card">
-        <h3>📈 TradingView</h3>
-        <p>Chart interaktif embedded langsung. Klik emiten, langsung muncul grafik lengkap.</p>
-      </div>
-      <div class="feature-card">
-        <h3>🧮 Risk Management</h3>
-        <p>Perhitungan lot size, SL, TP, dan Risk:Reward otomatis. Jangan trading buta.</p>
-      </div>
+      <div class="demo-ihsg">IHSG: 6.723 · RSI: 30.16 · SMA50: 7.357 · SMA200: 7.996</div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">ANTRI</div><div class="demo-stat-val g">78</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">MISS</div><div class="demo-stat-val b">0</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">WAIT</div><div class="demo-stat-val a">1</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">EXIT</div><div class="demo-stat-val r">6</div></div>
+    </div>
+
+    <!-- Mood bar -->
+    <div class="demo-mood">
+      Mood: <span class="mood-bearish">BEARISH</span>
+      &nbsp;|&nbsp; 7 Breakout · 6 Rebound · 5 Breakdown · 67 Sideways &nbsp;
+      <span class="mood-tag mood-golden">1 Golden</span>
+      <span class="mood-tag mood-death">2 Death</span>
+    </div>
+
+    <!-- Table -->
+    <div class="demo-table-wrap">
+      <table class="demo-table">
+        <thead>
+          <tr>
+            <th>EMITEN</th>
+            <th>HARGA</th>
+            <th>CHG%</th>
+            <th>RSI</th>
+            <th>MACD</th>
+            <th>CROSS/ZONE</th>
+            <th>RVOL</th>
+            <th>BDR</th>
+            <th>PWR</th>
+            <th>FASE</th>
+            <th>ENTRY</th>
+            <th>TP</th>
+            <th>SL</th>
+            <th>R:R</th>
+            <th>TYPE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="td-ticker"><strong>ASPR</strong><span class="liq-badge">LIKUID+</span></div></td>
+            <td>370</td>
+            <td class="chg-pos">+12.1%</td>
+            <td class="rsi-val">57.4</td>
+            <td class="macd-pos">+51.21</td>
+            <td><span class="cross-bull">● BULL</span></td>
+            <td class="rvol-hot">3.3x</td>
+            <td><span class="bdr-akum">AKUM</span></td>
+            <td class="pwr-dots">●●●●●</td>
+            <td><span class="fase-breakout">BREAKOUT</span></td>
+            <td class="entry-val">354 / 338</td>
+            <td class="tp-val">508</td>
+            <td class="sl-val">316</td>
+            <td class="rr-val good">4.05</td>
+            <td><span class="type-antri">ANTRI</span></td>
+          </tr>
+          <tr>
+            <td><div class="td-ticker"><strong>BIPI</strong><span class="liq-badge">LIKUID+</span></div></td>
+            <td>220</td>
+            <td class="chg-pos">+11.1%</td>
+            <td class="rsi-val">44.27</td>
+            <td class="macd-neg">-7.45</td>
+            <td><span class="cross-bear">● BEAR</span></td>
+            <td class="rvol-val">1.7x</td>
+            <td><span class="bdr-akum">AKUM</span></td>
+            <td class="pwr-dots">●●●●</td>
+            <td><span class="fase-breakout">BREAKOUT</span></td>
+            <td class="entry-val">214 / 208</td>
+            <td class="tp-val">268</td>
+            <td class="sl-val">198</td>
+            <td class="rr-val good">3.38</td>
+            <td><span class="type-antri">ANTRI</span></td>
+          </tr>
+          <tr>
+            <td><div class="td-ticker"><strong>BNBR</strong><span class="liq-badge">LIKUID+</span></div></td>
+            <td>175</td>
+            <td class="chg-pos">+12.2%</td>
+            <td class="rsi-val">46.81</td>
+            <td class="macd-pos">+3.64</td>
+            <td><span class="cross-bull">● BULL</span></td>
+            <td class="rvol-val">2.0x</td>
+            <td><span class="bdr-akum">AKUM</span></td>
+            <td class="pwr-dots mid">●●●</td>
+            <td><span class="fase-breakout">BREAKOUT</span></td>
+            <td class="entry-val">170 / 165</td>
+            <td class="tp-val">217</td>
+            <td class="sl-val">158</td>
+            <td class="rr-val good">3.92</td>
+            <td><span class="type-antri">ANTRI</span></td>
+          </tr>
+          <tr>
+            <td><div class="td-ticker"><strong>ENZO</strong><span class="liq-badge">LIKUID+</span></div></td>
+            <td>93</td>
+            <td class="chg-pos">+4.5%</td>
+            <td class="rsi-val">58.71</td>
+            <td class="macd-pos">+5.99</td>
+            <td><span class="cross-bull">● BULL</span></td>
+            <td class="rvol-val">0.4x</td>
+            <td style="color:var(--muted2)">—</td>
+            <td class="pwr-dots mid">●●</td>
+            <td><span class="fase-breakout">BREAKOUT</span></td>
+            <td class="entry-val">89 / 85</td>
+            <td class="tp-val">127</td>
+            <td class="sl-val">79</td>
+            <td class="rr-val good">3.80</td>
+            <td><span class="type-antri">ANTRI</span></td>
+          </tr>
+          <tr>
+            <td><div class="td-ticker"><strong>ICON</strong><span class="liq-badge">LIKUID</span></div></td>
+            <td>151</td>
+            <td class="chg-pos">+15.3%</td>
+            <td class="rsi-val">65.8</td>
+            <td class="macd-pos">+8.31</td>
+            <td><span class="cross-bull">● BULL</span></td>
+            <td class="rvol-val">1.7x</td>
+            <td><span class="bdr-akum">AKUM</span></td>
+            <td class="pwr-dots">●●●●</td>
+            <td><span class="fase-rebound">REBOUND</span></td>
+            <td class="entry-val">146 / 140</td>
+            <td class="tp-val">170</td>
+            <td class="sl-val">133</td>
+            <td class="rr-val">1.85</td>
+            <td><span class="type-antri">ANTRI</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="pricing" id="order">
-  <div class="container">
-    <h2 class="section-title">Harga Spesial Launching</h2>
-    <div class="price-box">
-      <div class="price-badge">DISKON 70%</div>
-      <h3>Screener Multi-Indikator</h3>
-      <div class="price-original">Rp 120.000/bulan</div>
-      <div class="price-final">Rp 36.000<span>/bulan</span></div>
-      <div class="price-note">⏰ Harga promo terbatas!</div>
-      
-      <ul class="price-features">
-        <li>Akses full dashboard</li>
-        <li>Semua indikator teknikal</li>
-        <li>Sinyal BUY/SELL/WATCH</li>
+<hr class="divider">
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-label">Fitur utama</div>
+  <h2 class="section-title">Satu dashboard,<br>semua yang kamu butuhkan</h2>
+  <div class="feat-grid">
+    <div class="feat-card hl"><div class="feat-icon">⭐</div><h3>Sinyal ANTRI / MISS / WAIT / EXIT</h3><p>Algoritma multi-kondisi yang hanya trigger saat setup benar-benar matang. Bukan sekadar RSI naik.</p></div>
+    <div class="feat-card hl"><div class="feat-icon">📊</div><h3>7+ Indikator Terintegrasi</h3><p>RSI, MACD, RVOL, BDR (akumulasi/distribusi), Power Meter, Golden/Death Cross, dan FASE dalam satu sinyal.</p></div>
+    <div class="feat-card hl"><div class="feat-icon">🎯</div><h3>TP / SL / Entry Otomatis</h3><p>Setiap sinyal sudah dilengkapi target profit, stop loss, dan dua titik entry berbasis ATR. Jelas dari awal.</p></div>
+    <div class="feat-card"><div class="feat-icon">🌡️</div><h3>IHSG Regime Filter</h3><p>Sistem mendeteksi kondisi pasar Bull/Neutral/Bear secara real-time. Proteksi otomatis saat pasar crash.</p></div>
+    <div class="feat-card"><div class="feat-icon">💧</div><h3>Filter Likuiditas</h3><p>Hanya saham dengan rata-rata transaksi >Rp 5 miliar/hari yang masuk. Jauhi saham nyangkut.</p></div>
+    <div class="feat-card"><div class="feat-icon">📱</div><h3>Akses dari Mana Saja</h3><p>Buka dari HP, tablet, atau laptop. Tidak perlu install apapun. Cukup 15 menit pagi sebelum pasar buka.</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HOW IT WORKS -->
+<section class="section" style="text-align:center">
+  <div class="section-label">Cara pakai</div>
+  <h2 class="section-title">Sesederhana ini</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h4>Bayar & Aktivasi</h4><p>Pilih paket, bayar via Midtrans. License langsung aktif otomatis.</p></div>
+    <div class="step"><div class="step-num">02</div><h4>Buka Dashboard</h4><p>Login dengan license key dari HP atau laptop. Tidak perlu install apapun.</p></div>
+    <div class="step"><div class="step-num">03</div><h4>Cek Sinyal Pagi</h4><p>Lihat daftar ANTRI hari ini. Screener sudah scan 88 saham untuk kamu.</p></div>
+    <div class="step"><div class="step-num">04</div><h4>Eksekusi & Disiplin</h4><p>Beli sesuai sinyal, ikuti TP dan SL yang sudah dihitung. Konsisten adalah kuncinya.</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-label">Kata pengguna</div>
+  <h2 class="section-title">Dari berbagai latar belakang</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Saya ibu rumah tangga, tidak sempat pantau market seharian. Dengan screener ini cukup 15 menit pagi — langsung tahu harus beli apa dan kapan keluar."</p>
+      <div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Sari R.</div><div class="testi-role">Ibu Rumah Tangga, Pekanbaru</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Sebelumnya beli saham ikut-ikutan grup. Sekarang pakai screener ini jauh lebih tenang karena ada dasar logika yang jelas — TP dan SL sudah ada semua."</p>
+      <div class="testi-author"><div class="testi-avatar">DH</div><div><div class="testi-name">Dani H.</div><div class="testi-role">Karyawan Swasta, Medan</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Win rate saya membaik setelah konsisten ikuti sinyal ANTRI. Yang paling suka R:R-nya selalu dihitung otomatis — tidak perlu kalkulasi manual lagi."</p>
+      <div class="testi-author"><div class="testi-avatar">BW</div><div><div class="testi-name">Bayu W.</div><div class="testi-role">Swing Trader, Surabaya</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRICING -->
+<section class="section" id="order">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="section-label">Harga berlangganan</div>
+    <h2 class="section-title">Pilih paket yang sesuai</h2>
+    <p style="font-size:.88rem;color:var(--muted2)">Harga promo launching — bisa naik kapan saja tanpa pemberitahuan</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Bulanan</div>
+      <div class="price-amount"><span class="price-rp">Rp</span><span class="price-num">36.000</span><span class="price-per">/bulan</span></div>
+      <p class="price-orig">Harga normal Rp 120.000 <span class="disc-tag">HEMAT 70%</span></p>
+      <ul class="price-list">
+        <li>Akses full dashboard 88 saham</li>
+        <li>Sinyal ANTRI, MISS, WAIT, EXIT</li>
+        <li>TP / SL / Entry otomatis tiap sinyal</li>
+        <li>IHSG Regime Filter (Bull/Bear/Neutral)</li>
         <li>Golden & Death Cross detection</li>
-        <li>Filter & sort advanced</li>
-        <li>Chart TradingView embedded</li>
-        <li>Auto-refresh real-time</li>
-        <li>Support via WhatsApp</li>
+        <li>Filter likuiditas & BDR/Akumulasi</li>
+        <li>Akses dari semua device</li>
       </ul>
-      
-      <button onclick="showForm()" class="btn btn-primary" style="width:100%">Pesan Sekarang</button>
-      
-      <div class="guarantee">
-        <p>🔒 Bukan rekomendasi investasi. Risiko ditanggung pengguna. <br>License aktif 30 hari.</p>
-      </div>
+      <button class="btn-pay outline" onclick="openModal('bulanan')">Pilih Bulanan</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-pop">⭐ PALING HEMAT</div>
+      <div class="price-name">Tahunan</div>
+      <div class="price-amount"><span class="price-rp">Rp</span><span class="price-num">380.000</span><span class="price-per">/tahun</span></div>
+      <p class="price-orig">Setara Rp 31.667/bulan · Hemat 2 bulan <span class="disc-tag">HEMAT 12 BULAN</span></p>
+      <ul class="price-list">
+        <li>Semua fitur paket Bulanan</li>
+        <li>Akses penuh 12 bulan tanpa perpanjang</li>
+        <li>Update indikator otomatis sepanjang tahun</li>
+        <li>Prioritas update fitur baru</li>
+      </ul>
+      <button class="btn-pay" onclick="openModal('tahunan')">Mulai Sekarang →</button>
+      <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.75rem">Bayar sekali, tenang setahun penuh</p>
     </div>
   </div>
 </section>
 
-<section class="order-section" id="formSection">
-  <div class="container">
-    <div class="form-box">
-      <h3 style="text-align:center;margin-bottom:25px;color:#fff">Konfirmasi Pesanan</h3>
-      <div class="form-group">
-        <label>Nama Lengkap</label>
-        <input type="text" id="orderName" placeholder="Nama Anda">
-      </div>
-      <div class="form-group">
-        <label>Email Aktif</label>
-        <input type="email" id="orderEmail" placeholder="nama@email.com">
-      </div>
-      <button onclick="submitOrder()" class="btn btn-primary" style="width:100%">Buat License Key</button>
-      
-      <div class="result-box" id="resultBox">
-        <h4>✅ License Key Anda</h4>
-        <p style="color:#aaa;font-size:13px">Simpan key ini! Jangan dibagikan.</p>
-        <div class="key-display" id="keyDisplay">SC-XXXX</div>
-        <p style="color:#aaa;font-size:13px;margin-top:10px">
-          Transfer <strong style="color:#fff">Rp 36.000</strong> ke rekening Anda<br>
-          lalu kirim bukti + key ini via WhatsApp untuk aktivasi.
-        </p>
-        <a href="#" class="wa-link" id="waLink" target="_blank">📤 Kirim ke WhatsApp</a>
-      </div>
+<hr class="divider">
+
+<!-- FAQ -->
+<section class="section" style="text-align:center">
+  <div class="section-label">Pertanyaan umum</div>
+  <h2 class="section-title" style="margin-bottom:2rem">FAQ</h2>
+  <div class="faq-list">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Apakah saya harus bisa baca chart untuk pakai ini?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Tidak perlu. Screener ini dirancang agar pemula pun langsung bisa ambil keputusan. Sinyal sudah diterjemahkan menjadi tiga pilihan sederhana: masuk sekarang (ANTRI), tunggu harga lebih baik (WAIT), atau hindari (EXIT). TP dan SL sudah dihitung otomatis.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Berapa lama waktu yang dibutuhkan setiap hari?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Cukup 10–20 menit di pagi hari sebelum pasar buka pukul 09.00 WIB. Lihat daftar sinyal, pilih yang sesuai kondisi kamu, eksekusi order, lalu lanjut aktivitas seperti biasa.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Win rate 63% artinya apa? Apakah pasti untung?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Win rate 63% artinya dari 100 transaksi yang mengikuti sinyal, sekitar 63 mencapai target TP. Ini bukan jaminan pasti untung — pasar saham selalu mengandung risiko. Namun dengan konsisten mengikuti TP/SL yang sudah dihitung, secara statistik hasilnya positif dalam jangka panjang. Angka ini dari backtest riil 2024–2026 pada 88 saham IDX pilihan.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Bagaimana proses pembayaran dan aktivasinya?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Klik tombol "Mulai Sekarang", isi nama dan email, lalu pilih metode pembayaran di popup Midtrans (transfer bank, QRIS, kartu kredit, dll). Setelah pembayaran dikonfirmasi, license key kamu akan aktif otomatis dan dikirim ke email yang didaftarkan.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Saham apa saja yang masuk screener?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">88 saham IDX pilihan yang diseleksi berdasarkan likuiditas minimum Rp 5 miliar/hari dan kualitas data historis. Mencakup saham-saham di sektor komoditas, keuangan, energi, dan consumer goods. Daftar lengkap tersedia setelah aktivasi.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Apakah license bisa digunakan di beberapa device?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Ya, satu license key bisa digunakan di HP, tablet, dan laptop sekaligus. License tidak terikat ke satu device tertentu.</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="container">
-    <p>© 2026 Screener IDX. Hak Cipta Dilindungi.</p>
-    <p style="margin-top:10px;font-size:12px;color:#444">Disclaimer: Bukan rekomendasi investasi.</p>
-  </div>
+  <p>© 2026 IDX Screener Pro. Hak Cipta Dilindungi.<br>
+  ⚠️ Disclaimer: Produk ini adalah alat bantu analisis teknikal, bukan rekomendasi investasi.<br>
+  Segala keputusan trading adalah tanggung jawab pengguna sepenuhnya. Investasi saham mengandung risiko kehilangan modal.</p>
 </footer>
 
-<script>
-  // GANTI INI DENGAN URL RAILWAY ANDA!
-  const API_URL = 'https://ihsg-screener-production.up.railway.app';
-  
-  function showOrder(){
-    document.getElementById('formSection').classList.add('active');
-    document.getElementById('formSection').scrollIntoView({behavior:'smooth'});
-  }
-  
-  function showForm(){showOrder();}
-  
-  async function submitOrder(){
-    const name = document.getElementById('orderName').value.trim();
-    const email = document.getElementById('orderEmail').value.trim();
-    
-    if(!name || !email){alert('Isi nama dan email!');return;}
-    
-    const btn = document.querySelector('#formSection button');
-    btn.textContent = 'Memproses...';
-    btn.disabled = true;
-    
-    try{
-      const res = await fetch(API_URL + '/api/buy', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({name, email, tier:'complex'})
-      });
-      const data = await res.json();
-      
-      if(data.success){
-        document.getElementById('keyDisplay').textContent = data.licenseKey;
-        document.getElementById('resultBox').classList.add('show');
-        
-        // Auto-generate WhatsApp link
-        const msg = `Halo, saya ${name}%0A%0ALicense Key: ${data.licenseKey}%0AEmail: ${email}%0A%0ASaya sudah transfer Rp 36.000. Mohon aktivasi.`;
-        document.getElementById('waLink').href = `https://wa.me/?text=${msg}`; // Ganti ?text= dengan nomor WA Anda kalau mau
-      } else {
-        alert('Error: ' + data.error);
-      }
-    }catch(e){
-      alert('Gagal terhubung ke server. Coba lagi.');
-      console.error(e);
-    }finally{
-      btn.textContent = 'Buat License Key';
-      btn.disabled = false;
-    }
-  }
-</script>
+<!-- ORDER MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.25rem">
+      <div class="modal-title">Lengkapi Data Pesanan</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <p class="modal-sub">Data ini digunakan untuk pengiriman license key ke email kamu.</p>
+    <div class="modal-paket-info">
+      <span class="modal-paket-name" id="modalPaketName">Paket Tahunan</span>
+      <span class="modal-paket-price" id="modalPaketPrice">Rp 380.000</span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="f-nama">Nama Lengkap</label>
+      <input class="form-input" type="text" id="f-nama" placeholder="Nama kamu">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="f-email">Email Aktif</label>
+      <input class="form-input" type="email" id="f-email" placeholder="nama@email.com">
+    </div>
+    <p class="modal-err" id="modalErr">Nama dan email wajib diisi.</p>
+    <button class="btn-pay" id="btnBayar" onclick="prosesPayment()">
+      Lanjut ke Pembayaran →
+    </button>
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.75rem">
+      🔒 Pembayaran aman via Midtrans · QRIS, Transfer Bank, Kartu Kredit
+    </p>
+  </div>
+</div>
 
+<script>
+// ── CONFIG — GANTI INI ─────────────────────────────────────────────────────
+const BACKEND_URL = 'https://ISI-RAILWAY-URL-KAMU.railway.app';
+// ───────────────────────────────────────────────────────────────────────────
+
+let selectedPaket = 'tahunan';
+
+function openModal(paket) {
+  selectedPaket = paket;
+  const label = paket === 'tahunan' ? 'Paket Tahunan' : 'Paket Bulanan';
+  const harga = paket === 'tahunan' ? 'Rp 380.000' : 'Rp 36.000';
+  document.getElementById('modalPaketName').textContent = label;
+  document.getElementById('modalPaketPrice').textContent = harga;
+  document.getElementById('modalBg').classList.add('active');
+  document.getElementById('modalErr').style.display = 'none';
+  return false;
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('active');
+}
+
+document.getElementById('modalBg').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+async function prosesPayment() {
+  const nama = document.getElementById('f-nama').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const errEl = document.getElementById('modalErr');
+  const btn = document.getElementById('btnBayar');
+
+  if (!nama || !email) {
+    errEl.textContent = 'Nama dan email wajib diisi.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    errEl.textContent = 'Format email tidak valid.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading-spin"></span>Memproses...';
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/create-transaction`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nama, email, paket: selectedPaket })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Gagal membuat transaksi.');
+
+    closeModal();
+
+    // Buka Midtrans Snap popup
+    window.snap.pay(data.token, {
+      onSuccess: function(result) {
+        window.location.href = `success.html?key=${data.license_key}&order=${data.order_id}`;
+      },
+      onPending: function(result) {
+        window.location.href = `pending.html?key=${data.license_key}&order=${data.order_id}`;
+      },
+      onError: function(result) {
+        alert('Pembayaran gagal. Silakan coba lagi atau hubungi support.');
+      },
+      onClose: function() {
+        // User tutup popup tanpa bayar — tidak apa-apa
+      }
+    });
+
+  } catch (err) {
+    errEl.textContent = err.message || 'Terjadi kesalahan. Coba lagi.';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Lanjut ke Pembayaran →';
+  }
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran Berhasil — IDX Screener Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#0B1120;color:#F9FAFB;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.card{background:#161E2E;border:1px solid rgba(34,197,94,.3);border-radius:16px;padding:2.5rem;max-width:480px;width:100%;text-align:center}
+.icon{font-size:3rem;margin-bottom:1.25rem}
+h1{font-size:1.6rem;font-weight:800;margin-bottom:.5rem}
+.sub{font-size:.9rem;color:#9CA3AF;margin-bottom:2rem;line-height:1.7}
+.key-box{background:#0B1120;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.key-label{font-size:.68rem;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.key-val{font-family:'DM Mono',monospace;font-size:1.3rem;font-weight:500;color:#22C55E;letter-spacing:.1em;word-break:break-all}
+.key-note{font-size:.75rem;color:#6B7280;margin-top:.5rem}
+.btn{display:block;width:100%;text-align:center;background:#22C55E;color:#000;font-weight:800;font-size:.9rem;padding:.9rem;border-radius:8px;text-decoration:none;margin-bottom:.75rem}
+.btn-copy{display:block;width:100%;text-align:center;background:transparent;color:#F9FAFB;font-weight:700;font-size:.88rem;padding:.85rem;border-radius:8px;border:1px solid #263347;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.75rem}
+.footer-note{font-size:.75rem;color:#6B7280;line-height:1.7;margin-top:1.5rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">✅</div>
+  <h1>Pembayaran Berhasil!</h1>
+  <p class="sub">License key kamu sudah aktif. Simpan key ini — kamu akan butuhkan untuk login ke dashboard screener.</p>
+  <div class="key-box">
+    <div class="key-label">License Key Kamu</div>
+    <div class="key-val" id="licenseKey">Memuat...</div>
+    <div class="key-note">License ini juga dikirim ke email yang kamu daftarkan.</div>
+  </div>
+  <button class="btn-copy" onclick="copyKey()">📋 Salin License Key</button>
+  <a class="btn" href="https://LINK-SCREENER-KAMU.com" id="btnDashboard">Buka Dashboard Screener →</a>
+  <p class="footer-note">
+    Ada pertanyaan? Hubungi support di WhatsApp atau email.<br>
+    © 2026 IDX Screener Pro
+  </p>
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const key = params.get('key') || 'Tidak ditemukan';
+document.getElementById('licenseKey').textContent = key;
+
+function copyKey() {
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '✓ Tersalin!';
+    setTimeout(() => btn.textContent = '📋 Salin License Key', 2000);
+  });
+}
+</script>
+</body>
+</html>
